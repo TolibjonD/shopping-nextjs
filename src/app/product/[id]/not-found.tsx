@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 export default function NotFound() {
@@ -22,10 +23,12 @@ export default function NotFound() {
               </Link>
             </div>
             <div className="mt-4">
-              <img
+              <Image
                 src="https://cdni.iconscout.com/illustration/premium/thumb/sorry-item-not-found-3328225-2809510.png"
                 alt="img"
                 className="object-cover w-full h-full"
+                height={400}
+                width={400}
               />
             </div>
           </div>

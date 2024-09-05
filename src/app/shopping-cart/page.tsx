@@ -8,12 +8,12 @@ import { useEffect, useState } from "react";
 const ShoppingCart = () => {
   const [total, settotal] = useState(0);
   const [products, setproducts] = useState<ProductType[]>(
-    JSON.parse(localStorage.getItem("carts") as string) || []
+    JSON.parse(window.localStorage.getItem("carts") as string) || []
   );
 
   const removeProduct = (id: number) => {
     const updatedCart = products.filter((product) => product.id !== id);
-    localStorage.setItem("carts", JSON.stringify(updatedCart));
+    window.localStorage.setItem("carts", JSON.stringify(updatedCart));
     setproducts(updatedCart);
   };
 
@@ -27,7 +27,7 @@ const ShoppingCart = () => {
       }
       return product;
     });
-    localStorage.setItem("carts", JSON.stringify(updatedCart));
+    window.localStorage.setItem("carts", JSON.stringify(updatedCart));
     setproducts(updatedCart);
   };
   const handleDecrement = (id: number) => {
@@ -44,7 +44,7 @@ const ShoppingCart = () => {
         }
         return product;
       });
-      localStorage.setItem("carts", JSON.stringify(updatedCart));
+      window.localStorage.setItem("carts", JSON.stringify(updatedCart));
       setproducts(updatedCart);
     }
   };
