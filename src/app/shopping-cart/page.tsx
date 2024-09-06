@@ -7,13 +7,11 @@ import { useEffect, useState } from "react";
 
 const ShoppingCart = () => {
   const [total, settotal] = useState(0);
-  const [products, setproducts] = useState<ProductType[]>(
-    JSON.parse(window.localStorage.getItem("carts") as string) || []
-  );
+  const [products, setproducts] = useState<ProductType[]>([]);
 
   const removeProduct = (id: number) => {
     const updatedCart = products.filter((product) => product.id !== id);
-    window.localStorage.setItem("carts", JSON.stringify(updatedCart));
+    localStorage.setItem("carts", JSON.stringify(updatedCart));
     setproducts(updatedCart);
   };
 
@@ -27,7 +25,7 @@ const ShoppingCart = () => {
       }
       return product;
     });
-    window.localStorage.setItem("carts", JSON.stringify(updatedCart));
+    localStorage.setItem("carts", JSON.stringify(updatedCart));
     setproducts(updatedCart);
   };
   const handleDecrement = (id: number) => {
@@ -44,10 +42,15 @@ const ShoppingCart = () => {
         }
         return product;
       });
-      window.localStorage.setItem("carts", JSON.stringify(updatedCart));
+      localStorage.setItem("carts", JSON.stringify(updatedCart));
       setproducts(updatedCart);
     }
   };
+
+  useEffect(() => {
+    const productsData = JSON.parse(localStorage.getItem("carts") as string);
+    setproducts(productsData);
+  },[])
 
   useEffect(() => {
     const total = products.reduce((acc, item) => {

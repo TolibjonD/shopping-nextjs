@@ -19,7 +19,7 @@ const ProductDetailPage = () => {
     const router = useRouter()
 
     const handleClick = () => {
-      const products: ProductType[] = JSON.parse((window.localStorage.getItem('carts')as string)) || [];
+      const products: ProductType[] = JSON.parse((localStorage.getItem('carts')as string)) || [];
       const isExistProduct = products.find(c => c.id === product?.id);
 
       if (isExistProduct) {
@@ -31,10 +31,10 @@ const ProductDetailPage = () => {
           }
           return c;
         })
-        window.localStorage.setItem('carts', JSON.stringify(updatedData));
+        localStorage.setItem('carts', JSON.stringify(updatedData));
       } else {
         const data = [...products, {...product, quantity: 1}];
-        window.localStorage.setItem('carts', JSON.stringify(data));        
+        localStorage.setItem('carts', JSON.stringify(data));        
       }
       toast("Product was added to your bag.")
     }
